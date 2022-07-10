@@ -3,7 +3,7 @@ include {
 }
 
 terraform {
-  source = "git@github.com:JamieTaffurelli/az-storageaccount.git//app?ref=v1.0.0"
+  source = "github.com/JamieTaffurelli/az-storageaccount.git//?ref=v1.0.0"
 }
 
 inputs = {
