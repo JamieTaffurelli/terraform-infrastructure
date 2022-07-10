@@ -30,7 +30,7 @@ jobs:
       run: |
        echo $PWD
        dir
-       cd azure
+       cd azure/dev
        echo $PWD
        dir
 
