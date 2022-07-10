@@ -30,6 +30,7 @@ jobs:
       run: |
        echo $PWD
        cd ./azure/dev/tf-state
+       echo $PWD
        dir
 
     - name: Terragrunt Format
