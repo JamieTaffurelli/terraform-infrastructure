@@ -36,7 +36,7 @@ jobs:
 
     - name: Terragrunt Format
       run: |
-       terragrunt format --terragrunt-working-dir $PWD/${{ env.TERRAGRUNT_WORKING_DIR }}
+       terragrunt format --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
 
     - name: Terragrunt Init
       run: |
