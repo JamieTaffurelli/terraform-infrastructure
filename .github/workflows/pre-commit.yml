@@ -7,7 +7,6 @@ env:
 
 jobs:
   pre-commit:
-    environment: deploy
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
