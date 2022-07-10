@@ -1,0 +1,55 @@
+on: pull_request
+
+concurrency: ci-${{ github.ref }}
+
+env:
+  PAGERDUTY_TOKEN: ${{ secrets.PAGERDUTY_TOKEN }}
+  TERRAFORM_VERSION: '1.2.4'
+  TERRAGRUNT_VERSION: 'v0.38.4'
+  TERRAGRUNT_WORKING_DIR: './pagerduty'
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+jobs:
+  terragrunt:
+    environment: plan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: 'Terragrunt Format'
+      uses: the-commons-project/terragrunt-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TERRAFORM_VERSION }}
+        tg_actions_version: ${{ env.TERRAGRUNT_VERSION }}
+        tf_actions_binary: 'terraform'
+        tf_actions_subcommand: 'fmt'
+        tf_actions_working_dir: ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: 'Terragrunt Init'
+      uses: the-commons-project/terragrunt-github-actions@master
+      with:
+        tf_actions_version: ${{ env.TERRAFORM_VERSION }}
+        tg_actions_version: ${{ env.TERRAGRUNT_VERSION }}
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: 'Terragrunt Validate'
+      uses: the-commons-project/terragrunt-github-actions@1.0.6
+      with:
+        tf_actions_version: ${{ env.TERRAFORM_VERSION }}
+        tg_actions_version: ${{ env.TERRAGRUNT_VERSION }}
+        tf_actions_subcommand: 'validate'
+        tf_actions_working_dir: ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: 'Terragrunt Plan'
+      uses: the-commons-project/terragrunt-github-actions@1.0.6
+      with:
+        tf_actions_version: ${{ env.TERRAFORM_VERSION }}
+        tg_actions_version: ${{ env.TERRAGRUNT_VERSION }}
+        tf_actions_subcommand: 'apply'
+        tf_actions_working_dir: ${{ env.TERRAGRUNT_WORKING_DIR }}
