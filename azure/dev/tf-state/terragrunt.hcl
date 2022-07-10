@@ -14,4 +14,5 @@ inputs = {
   network_acl_default_action                  = "Allow"
   log_analytics_workspace_name                = "logging"
   log_analytics_workspace_resource_group_name = "logging"
+  tags                                        = {}
 }
