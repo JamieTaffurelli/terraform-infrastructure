@@ -30,7 +30,7 @@ jobs:
       run: |
        echo $PWD
        dir
-       cd azure/dev/tf-state
+       cd azure
        echo $PWD
        dir
 
