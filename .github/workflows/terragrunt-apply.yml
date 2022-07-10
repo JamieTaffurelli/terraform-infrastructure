@@ -74,4 +74,4 @@ jobs:
 
     - name: Terragrunt Apply
       run: |
-       terragrunt apply --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
+       terragrunt apply --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }} -auto-approve
