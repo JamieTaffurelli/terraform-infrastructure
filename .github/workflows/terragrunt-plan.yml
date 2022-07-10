@@ -28,14 +28,6 @@ jobs:
 
     - name: Terragrunt Format
       run: |
-       echo $PWD
-       dir
-       cd azure/dev/tf-state
-       echo $PWD
-       dir
-
-    - name: Terragrunt Format
-      run: |
        terragrunt format --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
 
     - name: Terragrunt Init

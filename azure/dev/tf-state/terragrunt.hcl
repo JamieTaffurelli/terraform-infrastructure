@@ -6,7 +6,7 @@ terraform {
   source = "git@github.com:JamieTaffurelli/az-storageaccount.git//app?ref=v1.0.0"
 }
 
-inputs {
+inputs = {
   resource_group_name                         = "terraform"
   location                                    = "eastus"
   storage_account_name                        = "terraformstatedevsa"
