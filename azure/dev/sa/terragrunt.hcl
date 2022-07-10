@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  resource_group_name                         = "sa"
+  resource_group_name                         = "test"
   location                                    = "eastus"
   storage_account_name                        = "testgjsdnflsndfla"
   network_acl_default_action                  = "Allow"
