@@ -1,4 +1,7 @@
-on: pull_request
+on:
+  push:
+    branches:
+      - main
 
 concurrency: ci-${{ github.ref }}
 
@@ -41,3 +44,33 @@ jobs:
     - name: Terragrunt Plan
       run: |
        terragrunt plan --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+  terragrunt-apply:
+    environment: plan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Terragrunt
+      uses: autero1/action-terragrunt@v1.1.0
+      with:
+        terragrunt_version: ${{ env.TERRAGRUNT_VERSION }}
+
+    - name: Terragrunt Format
+      run: |
+       terragrunt fmt --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: Terragrunt Init
+      run: |
+       terragrunt init --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: Terragrunt Validate
+      run: |
+       terragrunt validate --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
+
+    - name: Terragrunt Apply
+      run: |
+       terragrunt apply --terragrunt-working-dir ${{ env.TERRAGRUNT_WORKING_DIR }}
